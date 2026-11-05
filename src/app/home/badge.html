@@ -1,0 +1,54 @@
+<svg class="rope" aria-hidden="true">
+  <path #ribbonEdge class="rope-edge" />
+  <path #ribbon id="badge-rope" class="rope-band" />
+  <text class="rope-text" dy="3.5">
+    <textPath href="#badge-rope" startOffset="6">
+      CRISTHIAN QUICAÑO · FULL STACK · CRISTHIAN QUICAÑO · FULL STACK · CRISTHIAN QUICAÑO
+    </textPath>
+  </text>
+</svg>
+
+<div
+  #card
+  class="id-card"
+  tabindex="0"
+  role="button"
+  aria-label="Credencial de Cristhian Quicaño. Pulsa Enter para voltearla."
+  (pointerdown)="onDown($event)"
+  (pointermove)="onMove($event)"
+  (pointerup)="onUp()"
+  (pointercancel)="onCancel()"
+  (keydown.enter)="flip()"
+  (keydown.space)="$event.preventDefault(); flip()"
+>
+  <span class="clip" aria-hidden="true"></span>
+
+  <div class="face front">
+    <span class="hole"></span>
+    <p class="kicker"><span>Huamanga</span><span>Ayacucho</span></p>
+    <p class="big" aria-hidden="true">FULL<br />STACK</p>
+    <img src="img/cristhian-recorte.webp" alt="" width="960" height="1000" draggable="false" />
+    <div class="plate">
+      <strong>{{ profile.firstLine }}<br />{{ profile.secondLine }}</strong>
+      <small>{{ profile.career }}</small>
+    </div>
+  </div>
+
+  <div class="face back">
+    <span class="hole"></span>
+    <app-weave class="back-weave" text="CRISTHIAN" [tiles]="4" [rows]="2" />
+    <p class="mono" aria-hidden="true">&lt;CQ/&gt;</p>
+    <p class="title">{{ profile.role }}</p>
+    <ul>
+      <li>Java</li>
+      <li>Spring Boot</li>
+      <li>Angular</li>
+      <li>TypeScript</li>
+      <li>SQL</li>
+    </ul>
+    <p class="meta">
+      Quechua · Español<br />
+      github.com/{{ profile.githubUser }}
+    </p>
+  </div>
+</div>

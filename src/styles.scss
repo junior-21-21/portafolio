@@ -1,0 +1,196 @@
+@import '@fontsource-variable/bricolage-grotesque/index.css';
+@import '@fontsource-variable/inter/index.css';
+@import '@fontsource-variable/jetbrains-mono/index.css';
+
+:root {
+  --bg: #0b0614;
+  --weld: linear-gradient(90deg, #5f5660, #a8552c 62%, #ff8a2f 88%, #fff3c4);
+  --surface: rgba(24, 12, 38, 0.72);
+  --line: rgba(255, 214, 170, 0.18);
+  --text: #fbf3ea;
+  --muted: #bbaebb;
+  --accent: #d9184f;
+  --accent-2: #ffb547;
+  --display: 'Bricolage Grotesque Variable', 'Inter Variable', system-ui, sans-serif;
+  --sans: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: 'JetBrains Mono Variable', ui-monospace, Consolas, monospace;
+  color-scheme: dark;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
+}
+
+body {
+  margin: 0;
+  overflow-x: clip;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent-2);
+  outline-offset: 3px;
+}
+
+.wrap {
+  width: min(1180px, 100%);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.section {
+  padding-top: 96px;
+  padding-bottom: 32px;
+}
+
+.gradient {
+  background: linear-gradient(95deg, #ffb547, #ff5a4d 55%, #e0245e);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.card {
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+  backdrop-filter: blur(6px);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 12px 20px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font: 600 0.9rem var(--sans);
+  color: var(--text);
+  cursor: pointer;
+  transition:
+    background 0.2s,
+    border-color 0.2s,
+    transform 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.btn-primary {
+  background: var(--accent);
+  box-shadow: 0 10px 26px rgba(217, 24, 79, 0.4);
+
+  &:hover {
+    background: #ec2f65;
+  }
+}
+
+.btn-ghost {
+  border-color: var(--line);
+  background: rgba(20, 10, 32, 0.6);
+
+  &:hover {
+    border-color: var(--accent-2);
+  }
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(20, 10, 32, 0.6);
+  font-size: 0.82rem;
+}
+
+/* Aparición al hacer scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition:
+    opacity 0.7s ease var(--reveal-delay, 0ms),
+    transform 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) var(--reveal-delay, 0ms);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Título soldado: al aparecer, un cordón incandescente avanza y se enfría */
+.weld-title {
+  position: relative;
+  width: fit-content;
+  margin: 0;
+  padding-bottom: 12px;
+  font-family: var(--display);
+  font-size: clamp(2.4rem, 5.5vw, 4rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+
+  &.center {
+    margin-inline: auto;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 4px;
+    border-radius: 4px;
+    background: var(--weld);
+    box-shadow: 0 0 14px rgba(255, 138, 47, 0.65);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.85s linear 0.2s;
+  }
+
+  &.is-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .weld-title::after {
+    transform: scaleX(1);
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

@@ -1,0 +1,233 @@
+:host {
+  position: absolute;
+  inset: 0;
+  display: block;
+  pointer-events: none;
+}
+
+.rope {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.rope-edge,
+.rope-band {
+  fill: none;
+  stroke-linecap: butt;
+  stroke-linejoin: round;
+}
+
+.rope-edge {
+  stroke: #d9184f;
+  stroke-width: 24;
+}
+
+.rope-band {
+  stroke: #160a24;
+  stroke-width: 22;
+}
+
+.rope-text {
+  fill: #f6ead6;
+  font: 700 9px var(--mono);
+  letter-spacing: 0.14em;
+}
+
+.id-card {
+  --w: 272px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: var(--w);
+  height: calc(var(--w) * 1.5);
+  transform-origin: 50% 6px;
+  transform-style: preserve-3d;
+  will-change: transform;
+  pointer-events: auto;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  -webkit-user-select: none;
+  border-radius: 16px;
+
+  &.grabbing {
+    cursor: grabbing;
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--accent-2);
+    outline-offset: 6px;
+  }
+}
+
+.clip {
+  position: absolute;
+  z-index: 3;
+  top: -16px;
+  left: 50%;
+  width: 26px;
+  height: 30px;
+  transform: translateX(-50%) translateZ(1px);
+  border: 3px solid #aab6cc;
+  border-radius: 8px 8px 12px 12px;
+  background: linear-gradient(#e7ecf5, #7c8aa3);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.5);
+}
+
+.face {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  backface-visibility: hidden;
+  box-shadow:
+    0 28px 60px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.16);
+}
+
+.hole {
+  position: absolute;
+  z-index: 2;
+  top: 10px;
+  left: 50%;
+  width: 44px;
+  height: 8px;
+  transform: translateX(-50%);
+  border-radius: 8px;
+  background: #0b0514;
+  box-shadow: inset 0 1px 2px #000;
+}
+
+.front {
+  background:
+    radial-gradient(rgba(255, 255, 255, 0.14) 1px, transparent 1.4px) 0 0 / 8px 8px,
+    linear-gradient(165deg, #e0245e 0%, #8f1450 48%, #2a0f4e 100%);
+  color: #fff;
+
+  img {
+    position: absolute;
+    left: 4%;
+    bottom: 18%;
+    width: 92%;
+    height: auto;
+    pointer-events: none;
+  }
+}
+
+.kicker {
+  position: absolute;
+  top: 26px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+  font: 600 0.58rem var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.85;
+}
+
+.big {
+  position: absolute;
+  top: 44px;
+  left: 14px;
+  margin: 0;
+  font-size: calc(var(--w) * 0.245);
+  font-weight: 800;
+  line-height: 0.88;
+  letter-spacing: -0.03em;
+  color: rgba(255, 255, 255, 0.22);
+}
+
+.plate {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 25%;
+  padding: 11px 16px;
+  background: #f4f1e8;
+  color: #160a24;
+
+  strong {
+    display: block;
+    font-size: calc(var(--w) * 0.066);
+    font-weight: 800;
+    line-height: 1.08;
+    text-transform: uppercase;
+  }
+
+  small {
+    display: block;
+    margin-top: 5px;
+    font-size: calc(var(--w) * 0.034);
+    font-weight: 500;
+    color: #5a4350;
+  }
+}
+
+.back-weave {
+  margin: 0 -20px 14px;
+}
+
+.back {
+  display: flex;
+  flex-direction: column;
+  padding: 0 20px 18px;
+  transform: rotateY(180deg);
+  background:
+    radial-gradient(90% 60% at 80% 0%, rgba(217, 24, 79, 0.45), transparent 70%),
+    #160a24;
+  color: var(--text);
+
+  .mono {
+    margin: 0;
+    font: 800 calc(var(--w) * 0.1) var(--mono);
+    letter-spacing: -0.04em;
+    color: var(--accent-2);
+  }
+
+  .title {
+    margin: 8px 0 16px;
+    font-size: 1.05rem;
+    font-weight: 700;
+  }
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    padding: 4px 9px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    font-size: 0.72rem;
+  }
+
+  .meta {
+    margin: auto 0 0;
+    font: 500 0.68rem/1.6 var(--mono);
+    color: var(--muted);
+  }
+}
+
+@media (max-width: 900px) {
+  .id-card {
+    --w: 232px;
+    // En táctil, deslizar en vertical sigue haciendo scroll; en horizontal mueve la tarjeta.
+    touch-action: pan-y;
+  }
+
+  .rope {
+    mask-image: linear-gradient(transparent, #000 70px);
+  }
+}
